@@ -1,0 +1,125 @@
+/*
+ * Copyright (c) 2008, Timothy Boronczyk
+ *
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *  1. Redistributions of source code must retain the above copyright notice, 
+ *     this list of conditions and the following disclaimer.
+ *
+ *  2. Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *  3. The names of the authors may not be used to endorse or promote products 
+ *     derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED 
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+.dialog {
+    border:    1px solid black;
+    position:  fixed;
+    width:     400px;
+}
+
+.dialog .titleArea {
+    background: #B8D0E9 url('../img/dialog_titlebar.gif') left top repeat-x;
+    border:     1px solid #B8D0E9;
+    clear:      both;
+    height:     21px;
+}
+
+.dialog .titleArea .text {
+    color:        #000;
+    font-family:  "Segoe UI", Verdana, Arial, Sans, sans-serif;
+    font-size:    12px;
+    float:        left;
+    line-height:  20px;
+    margin-left:  5px;
+    margin-right: 5px;
+}
+
+.dialog .titleArea .exitButton {
+    background:   url('../img/dialog_btn_exit.gif') right top no-repeat;
+    cursor:       pointer;
+    float:        right;
+    height:       15px;
+    margin-right: 5px;
+    margin-top:   3px;
+    width:        28px;
+}
+
+.dialog .messageArea {
+    background-color: #F0F0F0;
+    border-left:      1px solid #B8D0E9;
+    border-right:     1px solid #B8D0E9;
+    clear:            both;
+    padding:          10px;
+    text-align:       left;
+}
+
+.dialog .messageArea .icoConfirm,
+.dialog .messageArea .icoWarn,
+.dialog .messageArea .icoInfo,
+.dialog .messageArea .icoError,
+.dialog .messageArea .icoCustom {
+    min-height:   48px;
+    font-family:  "Segoe UI", Verdana, Arial, Sans, sans-serif;
+    font-size:    12px;
+    line-height:  16px;
+}
+
+.dialog .messageArea .icoConfirm,
+.dialog .messageArea .icoWarn,
+.dialog .messageArea .icoInfo,
+.dialog .messageArea .icoError {
+    padding-left: 60px;
+}
+
+.dialog .messageArea .icoConfirm {
+    background: #F0F0F0 url('../img/dialog_ico_confirm.png') left top no-repeat;
+}
+
+.dialog .messageArea .icoWarn {
+    background: #F0F0F0 url('../img/dialog_ico_warn.png') left top no-repeat;
+}
+
+.dialog .messageArea .icoInfo {
+    background: #F0F0F0 url('../img/dialog_ico_info.png') left top no-repeat;
+}
+
+.dialog .messageArea .icoError {
+    background: #F0F0F0 url('../img/dialog_ico_error.png') left top no-repeat;
+}
+
+.dialog .messageArea .icoCustom {
+    background: #F0F0F0;
+}
+
+.dialog .buttonArea {
+    background-color: #F0F0F0;
+    border-bottom:    1px solid #B8D0E9;
+    border-left:      1px solid #B8D0E9;
+    border-right:     1px solid #B8D0E9;
+    clear:            both;
+    text-align:       center;
+}
+
+.dialog .buttonArea input[type=button] {
+    width:  72px;
+    margin: 5px 3px;
+}
+
+.modalScreen {
+    background-color: #999;
+    bottom:           0px;
+    filter:           alpha(opacity=30);
+    left:             0px;
+    opacity:          0.30;
+    position:         fixed;
+    right:            0px;
+    top:              0px;
+}

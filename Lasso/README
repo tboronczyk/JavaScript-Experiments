@@ -1,0 +1,15 @@
+Lasso is a cross-browser compatible selection widget written in JavaScript.
+
+    * Selection may be made by dragging in any direction.
+
+    * Obtain selection information through a callback function.
+
+    * Code is lightweight and portable-- no framework dependencies.
+
+    * Cross-Browser compatible:
+        * Internet Explorer (version 7+)
+        * Firefox
+        * Safari
+        * Opera
+        * Google Chrome
+        * Konqueror

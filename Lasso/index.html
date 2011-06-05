@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Copyright (c) 2009, Timothy Boronczyk
+
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+
+ 2. Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+ 3. The names of the authors may not be used to endorse or promote products 
+    derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED 
+WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Lasso</title>
+  <script type="text/javascript" src="js/lasso.js"></script>
+  <script type="text/javascript">
+window.onload = function () {
+    Lasso("img1", function (x, y, width, height) {
+            document.getElementById('selX').value = x;
+            document.getElementById('selY').value = y;
+            document.getElementById('selWidth').value = width;
+            document.getElementById('selHeight').value = height;
+        });
+
+    Lasso("img2", function (x, y, width, height) {
+            var img = document.getElementById('img2Cropped');
+            img.style.backgroundImage = document.getElementById('img2').src;
+            img.style.backgroundPosition = -x + "px " + (-y) + "px"
+            img.style.width = width + "px";
+            img.style.height = height + "px";
+        });
+
+};
+  </script>
+ </head>
+ <body>
+  <h1>Lasso</h1>
+  <p>Lasso is a cross-browser compatible selection widget written in
+JavaScript.</p>
+  <ul>
+   <li>Selection may be made by dragging in any direction.</li>
+   <li>Obtain selection information through a callback function.</li>
+   <li>Code is lightweight and portable-- no framework dependencies.</li>
+   <li>Cross-Browser compatible:
+    <ul>
+     <li>Internet Explorer (version 6+)</li>
+     <li>Firefox</li>
+     <li>Safari</li>
+     <li>Opera</li>
+     <li>Google Chrome</li>
+     <li>Konqueror</li>
+    </ul></li>
+  </ul>
+  <h2>Try It Out</h2>
+  <h3>Example 1: Lasso Position</h3>
+  <img id="img1" src="img/image.jpg" alt="a cute kitten"
+   style="float: left; margin-right: 10px;"/>
+  <p><strong>Position</strong></p>
+  <form action="#">
+   <div>
+    <label for="selX">X:</label>
+    <input type="text" id="selX" value="0" disabled="disabled" size="3"/>
+    <label for="selX">Y:</label>
+    <input type="text" id="selY" value="0" disabled="disabled" size="3"/>
+   </div>
+  </form>
+  <p><strong>Size</strong></p>
+  <form action="#">
+   <div>
+    <label for="selWidth">Width:</label>
+    <input type="text" id="selWidth" value="0" disabled="disabled" size="3"/>
+    <label for="selHeight">Height:</label>
+    <input type="text" id="selHeight" value="0" disabled="disabled" size="3"/>
+   </div>
+  </form>
+  <br style="clear:both;"/>
+  <h3>Example 2: Image Cropping</h3>
+  <img id="img2" src="img/image.jpg" alt="a cute kitten"
+   style="float: left; margin-right: 10px;"/>
+  <p><strong>Cropped</strong></p>
+  <div id="img2Cropped" 
+   style="background-image: url('img/image.jpg'); margin-left: 485px;"/></div>
+  <br style="clear:both;"/>
+  <h2>Documentation</h2>
+  <h3>Sample Implementation</h3>
+<pre>&lt;script type="text/javascript" src="js/lasso.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+window.onload = function () {
+    Lasso(document.getElementById('myPicture'),
+        function (x,y, width,height) {
+            alert("x: " + x + "\n" +
+                  "y: " + y + "\n" +
+                  "width: " + width + "\n"
+                  "height: " + height);
+            });
+};
+&lt;/script&gt;
+</pre>
+  <h3>Methods and Arguments</h3>
+  <dl>
+   <dt><tt><strong>Lasso</strong>(imageId, callback)</tt></dt>
+   <dd>Constructor; <tt>imageId</tt> is id of element to which the lasso is
+    bound. <tt>callback</tt> is a function executed when a selection is made. 
+    <br/><br/>The signature of <tt>callback</tt> is 
+    <tt>callback(x,y, width,height)</tt> where:<br/>    
+    <dl>
+     <dt><tt>x</tt></dt><dd>the X offset of the top-left corner of the selection</dd>
+     <dt><tt>y</tt></dt><dd>the Y offset of the top-left corner of the selection</dd>
+     <dt><tt>width</tt></dt><dd>the width the select area</dd>
+     <dt><tt>height</tt></dt><dd>the height the select area</dd>
+    </dl></dd>
+  </dl>
+ </body>
+</html>
+

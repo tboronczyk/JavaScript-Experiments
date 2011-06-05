@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Copyright (c) 2008, Timothy Boronczyk
+
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+ 3. The names of the authors may not be used to endorse or promote products 
+    derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED 
+WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Dialog</title>
+  <link rel="stylesheet" type="text/css" href="css/dialog_styles.css"/>
+  <script type="text/javascript" src="js/drag.js"></script>
+  <script type="text/javascript" src="js/dialog.js"></script>
+  <script type="text/javascript">
+window.onload = function ()
+{
+    document.getElementById('dialogTypeForm').onsubmit = function () {
+        var d;
+        switch (document.getElementById('dialogTypeSelect').value) {
+        case "TYPE_CUSTOM":
+            var html = '<img src="img/ico_keys.png" alt="" style="float:left; margin: 10px;"/>' +
+                '<p><strong>Please sign in to continue.</strong></p>'                           +
+                '<form><table><tr>'                                                             +
+                '<td><label for="dialog_username">Username:</label></td>'                       +
+                '<td><input type="text" id="dialog_username"/></td></tr>'                       +
+                '<tr><td><label for="dialog_password">Password:</label></td>'                   +
+                '<td><input type="password" id="dialog_password"/></td></tr>'                   +
+                '<tr><td colspan="2"><input type="checkbox" id="dialog_remember"/> '            +
+                '<label for="dialog_remember">Remember this information.</label>'               +
+                '</td></tr><table></form><br style="height: 1px; clear:both;"/>';
+
+            d = new Dialog(Dialog.TYPE_CUSTOM,
+                           'Authentication Required',
+                           html);
+
+            d.onBeforeShow = function (dlg) {
+                dlg.childNodes[2].childNodes[0].value = 'Sign In';
+                dlg.childNodes[2].childNodes[1].value = 'Cancel';
+            };
+
+            d.onAfterShow = function (dlg) {
+                document.getElementById('dialog_username').focus();
+            };
+
+            d.onResponseYes = function (dlg) {
+                var username = document.getElementById('dialog_username').value;
+                var password = document.getElementById('dialog_password').value;
+                var remember = document.getElementById('dialog_remember').checked;
+
+                alert('Username: ' + ((username != '') ? username : 'blank') + "\n" +
+                      'Password: ' + ((password != '') ? password : 'blank') + "\n" +
+                      'Remember this information: ' + remember);
+            };
+
+            d.onResponseNo = function (dlg) {
+                alert('"Cancel" button was clicked.');  
+            };
+            break;
+
+        case "TYPE_CONFIRM":
+            d = new Dialog(Dialog.TYPE_CONFIRM,
+                           'Confirmation',
+                           'Are you sure you really want to do that?');
+
+            d.onAfterShow = function (dlg) {
+                dlg.childNodes[2].childNodes[0].focus();
+            };
+
+            d.onResponseYes = function (dlg) {
+                alert('"YES" button was clicked.');
+            };
+
+            d.onResponseNo = function (dlg) {
+                alert('"NO" button was clicked.');
+            };
+            break;
+
+        case "TYPE_INFO":
+            d = new Dialog(Dialog.TYPE_INFO,
+                           'Information',
+                           'The answer is 42.');
+
+            d.onAfterShow = function (dlg) {
+                dlg.childNodes[2].childNodes[0].focus();
+            };
+
+            d.onResponseOk = function (dlg) {
+                alert('"OK" button was clicked.');
+            };
+            break;
+
+        case "TYPE_WARNING":
+            d = new Dialog(Dialog.TYPE_WARNING,
+                           'Warning',
+                           'Danger Will Robinson, Danger!');
+
+            d.onAfterShow = function (dlg) {
+                dlg.childNodes[2].childNodes[0].focus();
+            };
+
+            d.onResponseOk = function (dlg) {
+                alert('"OK" button was clicked.');
+            };
+            break;
+
+        case "TYPE_ERROR":
+            d = new Dialog(Dialog.TYPE_ERROR,
+                           'Error',
+                           'Ooops... you broke it!');
+
+            d.onAfterShow = function (dlg) {
+                dlg.childNodes[2].childNodes[0].focus();
+            };
+
+            d.onResponseOk = function (dlg) {
+                alert('"OK" button was clicked.');
+            };
+            break;
+        }
+
+        d.show(document.getElementById('dialogShowModal').checked);
+        return false;
+    };
+};
+  </script>
+ </head>
+ <body>
+  <h1>Dialog</h1>
+  <p>Dialog is a lightweight and unobtrusive dialog widget that's easy and fun
+to use!</p>
+  <ul>
+   <li>Written completely in JavaScript and CSS.</li>
+   <li>Styling is done completely with CSS so you can easily customize your
+dialogs' appearance.</li>
+   <li>Supports multiple-dialog types:
+    <ul>
+     <li>Confirmation</li>
+     <li>Information</li>
+     <li>Warning</li>
+     <li>Error</li>
+    </ul></li>
+   <li>Modal or non-modal displays; modal dialogs block input to the page until
+the dialog is dismissed.</li>
+   <li>Dialog Message may display HTML for more complex dialogs (inclusion of a
+checkbox labeled "Don't show me this again..." for example).</li>
+   <li>Dialogs may be moved about with drag and drop.</li>
+   <li>Cross-Browser compatible:
+    <ul>
+     <li>Internet Explorer (version 7+)</li>
+     <li>Firefox</li>
+     <li>Safari</li>
+     <li>Opera</li>
+     <li>Google Chrome</li>
+     <li>Konqueror</li>
+    </ul></li>
+   <li>Handle dialog responses with event callbacks.</li>
+   <li>Code is lightweight and portable-- no framework dependencies.</li>
+  </ul>
+  <h2>Try It Out</h2>
+  <form action="#" id="dialogTypeForm">
+   <div>
+    <label for="dialogTypeSelect">Dialog Type</label>
+    <select id="dialogTypeSelect">
+     <option value="TYPE_CONFIRM">Confirmation</option>
+     <option value="TYPE_INFO">Information</option>
+     <option value="TYPE_WARNING">Warning</option>
+     <option value="TYPE_ERROR">Error</option>
+     <option value="TYPE_CUSTOM">Custom</option>
+    </select>
+    <input type="checkbox" id="dialogShowModal"/>
+    <label for="dialogShowModal">Modal</label>
+    <input type="submit" value="Show Dialog" />
+   </div>
+  </form>
+  <h2>Documentation</h2>
+  <h3>Sample Implementation</h3>
+<pre>&lt;link rel="stylesheet" type="text/css" href="css/dialog_styles.css"/&gt;
+&lt;script type="text/javascript" src="js/drag.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/dialog.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+window.onload = function () {
+    document.getElementById('myFormSubmit').onclick = function () {
+        var d = new Dialog(Dialog.TYPE_CONFIRM,
+                           'Confirmation',
+                           'Are you sure want to submit the form?');
+        d.onResponseYes = function (dlg) {
+            document.getElementById('myForm').submit();
+        };
+        d.show(true);
+        return false;
+    };
+};
+&lt;/script&gt;
+</pre>
+  <h3>Methods and Arguments</h3>
+  <dl>
+   <dt><tt><strong>Dialog</strong>(dialogType, title, message)</tt></dt>
+   <dd>Constructor; dialogType is one of the following constants:
+    <dl>
+     <dt><tt>Dialog.TYPE_CONFIRM</tt></dt><dd>Confirmation</dd>
+     <dt><tt>Dialog.TYPE_INFO</tt></dt><dd>Informational</dd>
+     <dt><tt>Dialog.TYPE_WARNING</tt></dt><dd>Warning</dd>
+     <dt><tt>Dialog.TYPE_ERROR</tt></dt><dd>Critical error</dd>
+     <dt><tt>Dialog.TYPE_CUSTOM</tt></dt><dd>Custom<br/><strong>Note:</strong>
+      messageArea contents is selectable when dialog is this type</dd>
+    </dl></dd>
+   <dt><tt><strong>show</strong>(isModal)</tt></dt>
+   <dd>Display the dialog window. Optional argument determines whether to show
+modal; defaults to true.</dd>
+  </dl>
+  <h3>Events</h3>
+  <dl>
+   <dt><tt><strong>onResponseYes</strong>(dialog)</tt></dt>
+   <dd>Triggered when user presses Yes button. Argument received is reference to
+    dialog window. Return false to cancel event.</dd>
+   <dt><tt><strong>onResponseNo</strong>(dialog)</tt></dt>
+   <dd>Triggered when user presses No button. Argument received is reference to
+    dialog window. Return false to cancel event.</dd>
+   <dt><tt><strong>onResponseOk</strong>(dialog)</tt></dt>
+   <dd>Triggered when user presses Ok button. Argument received is reference to
+    dialog window. Return false to cancel event.</dd>
+   <dt><tt><strong>onBeforeShow</strong>(dialog)</tt></dt>
+   <dd>Triggered immediately before the dialog is shown. Argument received is
+    reference to dialog window.</dd>
+   <dt><tt><strong>onAfterShow</strong>(dialog)</tt></dt>
+   <dd>Triggered immediately after the dialog is shown. Argument received is
+    reference to dialog window.</dd>
+   <dt><tt><strong>onBeforeExit</strong>(dialog)</tt></dt>
+   <dd>Triggered immediately before the dialog box is closed. Argument received
+    is reference to dialog window. Return false to cancel event.</dd>
+   <dt><tt><strong>onAfterExit</strong>(dialog)</tt></dt>
+   <dd>Triggered immediately after the dialog box is closed. Argument received
+    is reference to dialog window.</dd>
+  </dl>
+  <h3>Class Selectors</h3>
+  <img src="img/dialog.png" alt="dialog box with numbered areas"/>
+  <ol>
+   <li>div.dialog</li>
+   <li>div.titleArea</li>
+   <li>div.titleArea div.text</li>
+   <li>div.dialog div.exitButton</li>
+   <li>div.messageArea</li>
+   <li>div.messageArea div.icoConfirm|.icoWarn|.icoInfo|.icoError|.icoCustom</li>
+   <li>div.buttonArea</li>
+   <li>div.modalScreen</li>
+  </ol>
+ </body>
+</html>
+

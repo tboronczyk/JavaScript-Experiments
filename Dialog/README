@@ -1,0 +1,33 @@
+Dialog is a lightweight and unobtrusive dialog widget that's easy and fun to
+use!
+
+    * Written completely in JavaScript and CSS.
+
+    * Styling is done completely with CSS so you can easily customize your
+      dialogs' appearance.
+
+    * Supports multiple-dialog types:
+        * Confirmation
+        * Information
+        * Warning
+        * Error
+
+    * Modal or non-modal displays; modal dialogs block input to the page until
+      the dialog is dismissed.
+
+    * Dialog Message may display HTML for more complex dialogs (inclusion of a
+      checkbox labeled "Don't show me this again..." for example).
+
+    * Dialogs may be moved about with drag and drop.
+
+    * Cross-Browser compatible:
+        * Internet Explorer (version 7+)
+        * Firefox
+        * Safari
+        * Opera
+        * Google Chrome
+        * Konqueror
+
+    * Handle dialog responses with event callbacks.
+
+    * Code is lightweight and portable-- no framework dependencies.
